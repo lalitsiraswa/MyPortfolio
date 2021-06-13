@@ -1,0 +1,30 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container">
+        <h3>Project Form</h3>
+
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- {{ form }} -->
+
+            {{ form.media }} <!--It Provide the CKeditor facility on frontend-->
+
+            {% for field in form %}
+
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">{{field.label}}</label>
+                {{field}}
+            </div>
+
+            {% endfor %}
+
+            <input class="btn btn-primary" type="submit" value="Submit">
+
+        </form>
+
+    </div>
+
+{% endblock content %} 

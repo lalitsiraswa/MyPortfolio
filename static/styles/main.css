@@ -1,0 +1,176 @@
+.body{
+    background-color: #E5E5E5;
+}
+
+.section--1{
+    /* background-color: white; */
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+.section--2{
+    background-color:#E5E5E5;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+.navigation-bar{
+    /* gap: 1em; */
+    background-color: #354955;
+    height: 50px;
+    display: flex;
+    justify-content: center; /* centerlised the nav-bar  elements */
+    align-items: center;
+}
+
+.nav-link{
+    color: #fff;
+}
+
+.hero{
+    background-color: #1F2428;
+    /*height: 100vh;*/ /* vh : viewport */
+    /* height: 70vh; */
+    min-height: auto;
+    /* min-height: 60vh; */
+    color: white;
+}
+
+#profile_pic{
+    height: 200px;
+    width: 200px;
+    object-fit: cover; /* Set the image height and width */
+    border-radius: 50%;
+    /* border: black 3px solid; */
+    margin-top: 20px;
+}
+
+.hero--content{
+    width: 800px;
+    margin: 0px auto; 
+    /* padding: 3em; */
+    /* background-color: black; */
+}
+
+.hero--content--intro{
+    /* padding-top: 3em; */
+    display: flex;
+    color:white;
+    justify-content: center;
+    align-items: center; /* Both profile pic and user name in same alignment */
+    gap: 2em;
+    /* background-color: black; */
+    margin-bottom: 3em;
+}
+
+.intro--name{
+    font-size: 100px;
+    letter-spacing: .1em;
+    font-weight: 700px;
+    line-height: .9em;
+}
+
+.description{
+    font-size: 65px;
+    /* letter-spacing: 0.16em; */
+    /* float: left; */
+    text-align: center;
+}
+
+.slogan{
+    font-size: 24px;
+    /* letter-spacing: 0.16em; */
+    /* float: left; */
+    text-align: center;
+}
+
+.projects--wrapper{
+    display: grid;
+    /* display: flex; */
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: flex-start;
+    gap: 2em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    /* overflow-x: auto; */
+    /* -------------------------------- */
+    /* display: flex;   */
+    /*justify-content: flex-start;*/ /* everything starts with left */
+}
+
+.project--column{
+    /* width: 300px; */
+    /* margin: 10px; */
+}
+
+.project-thumbnail{
+    width: 100%;
+    border: 3px black solid;
+    border-radius: 20px;
+    /* height: 350px;  */
+}
+
+.project-body{
+    background-color: white;
+    padding: 1em;
+}
+
+.skills--container{
+    width: 600px;
+    margin: 0 auto;
+    padding: 1em;
+    /* background-color: black; */
+}
+
+.skills--wrapper{
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+.other--skills-wrapper{
+    display: flex;
+    gap: 1em;
+}
+
+.skill-tag{ 
+    background-color: #C4E7F2;
+    /* width: auto; */
+    width: fit-content; /* width of element is equal to content inside element */
+    padding: 3px 20px;
+    border-radius: 20px;
+    display: flex;
+}
+
+.project--image{
+    max-width: 700px;
+}
+
+@media (max-width:900px) {
+    .hero--content--intro{
+        flex-direction: column;
+    }
+    .projects--wrapper{
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width:600px) {
+    .skills--container{
+        width: 100%;
+        background-color:chocolate;
+        /* margin: 0 auto; */
+        /* background-color: black; */
+    }
+}
+
+@media (max-width:600px) {
+    .hero--content{
+        width: 100%;
+        /* margin: 0px auto;  */
+        /* padding: 3em; */
+        background-color: black;
+    }
+}
+
+
+
+

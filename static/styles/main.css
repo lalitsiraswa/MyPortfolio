@@ -144,6 +144,13 @@
     max-width: 700px;
 }
 
+.contact--form{
+    display: block;
+    max-width: 600px;
+    margin: 0 auto;
+    /* background-color: black; */
+}
+
 @media (max-width:900px) {
     .hero--content--intro{
         flex-direction: column;

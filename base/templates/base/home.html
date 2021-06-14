@@ -60,7 +60,7 @@
         <div class="skills--container">
             <h3>More About Me</h3>
 
-            {% for skill in dskills %}
+            {% for skill in detailedskills %}
 
             <div class="skills--wrapper">
                 <h5>{{ skill.title }}</h5>
@@ -90,6 +90,25 @@
 
         </div>
 
+    </section>
+
+    <section class="section--2">
+        <div class="container">
+            <form class="contact--form" method="POST" action="">
+                {% csrf_token %}
+                {% for field in form %}
+
+                <div class="mb-3">
+                    <label for="exampleInputPassword" class="form-label">{{ field.label }}</label>
+                    {{ field }}
+                </div>
+
+                {% endfor %}
+
+                <input class="btn btn-primary" type="submit" value="Submit">
+
+            </form>  
+        </div>
     </section>
 
 {% endblock content %}

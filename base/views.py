@@ -1,7 +1,9 @@
+import contextlib
 from typing import ContextManager
+from django.forms.models import model_to_dict
 from django.shortcuts import render, redirect
-from .models import Project, Skill, Tag, Message
-from .forms import ProjectForm, MessageForm
+from .models import Project, Skill, Tag, Message, Endorsement, Comment
+from .forms import ProjectForm, MessageForm, SkillForm, EndorsementForm, CommentForm
 from django.contrib import messages
 
 # Create your views here.
@@ -10,6 +12,7 @@ def homePage(request):
     detailedskills = Skill.objects.exclude(body='')
 
     skills = Skill.objects.filter(body='')
+    endorsement = Endorsement.objects.all().filter(approved=True)
 
     form = MessageForm()
 
@@ -24,16 +27,36 @@ def homePage(request):
         'projects':projects, 
         'skills':skills,
         'detailedskills':detailedskills,
-        'form': form
+        'form': form,
+        'endorsement': endorsement
     }
     return render(request, 'base/home.html', context=context)
 
 def projectPage(request, pk):
     project = Project.objects.get(id=pk)
+
+    count = project.comment_set.count()
+
+    comments = project.comment_set.all().order_by('-created')
+
+    form = CommentForm()
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False) # Assign the form object without saving
+            comment.project = project # Assign the project to comment
+            comment.save() 
+            messages.success(request, "Your Comment Was Successfully Added!")
+            # print(form)
+            # return redirect('home')
+
     context = {
         'project': project,
+        'count': count,
+        'comments': comments,
+        'form': form
     }
-    return render(request, 'base/project.html', context)
+    return render(request, 'base/project.html', context=context)
 
 def addProject(request):
     form = ProjectForm()
@@ -83,3 +106,29 @@ def messagePage(request, pk):
         'message': message
     }
     return render(request, 'base/message.html', context=context)
+
+def addSkill(request):
+    form = SkillForm()
+    if request.method == 'POST':
+        form = SkillForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your Skill Was Successfully Added!")
+            return redirect('home')
+    context = {
+        'form': form
+    }   
+    return render(request, 'base/skill_form.html', context=context)
+
+def addEndorsement(request):
+    form = EndorsementForm()
+    if request.method == 'POST':
+        form = EndorsementForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Thank You, Your Endorsement Was Successfully Added!")
+            return redirect('home')
+    context = {
+        'form': form
+    }   
+    return render(request, 'base/endorsement_form.html', context=context)

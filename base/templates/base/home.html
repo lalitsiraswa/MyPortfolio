@@ -19,28 +19,29 @@
 
     </section>
 
-    <section class="container section--2">
-        <h3>My Projects</h3> 
-        <h5>Projects that makes my journey worthwhile</h5>               
-        
-        <div class="projects--wrapper">
-            {% for project in projects %}
-            <div class="project--column">
-                <a href="{% url 'project' project.id %}">
-                    <img class="project-thumbnail" src="{{ project.thumbnail.url }}" alt="">
-                </a>
-                <div class="project-body">
-                    <h5>{{ project.title }}</h5>
+    <section class="section--2">
+        <div class="container">
+            <h3>My Projects</h3> 
+            <h5>Projects that makes my journey worthwhile</h5>               
+            
+            <div class="projects--wrapper">
+                {% for project in projects %}
+                <div class="project--column">
+                    <a href="{% url 'project' project.id %}">
+                        <img class="project--thumbnail" src="{{ project.thumbnail.url }}" alt="">
+                    </a>
+                    <div class="project-body">
+                        <h5>{{ project.title }}</h5>
+                    </div>
                 </div>
-            </div>
+    
+                {% empty %}
+    
+                    <h3>There Are No Project In The Database!</h3>
+    
+                {% endfor %}
+            </div> 
 
-            {% empty %}
-
-                <h3>There Are No Project In The Database!</h3>
-
-            {% endfor %}
-
-        </div> 
 
         <div class="about-wrapper">
             <h3>More About Me</h3> 
@@ -51,6 +52,7 @@
                 essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
                 containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
                 including versions of Lorem Ipsum.</p> 
+        </div>
         </div>
 
     </section>
@@ -93,6 +95,29 @@
     </section>
 
     <section class="section--2">
+
+        <div class="skills--container">
+            <h3>Endorsement</h3>
+            <a class="btn btn-primary my-3" href="{% url 'add-endorsement' %}">Add Endorsement</a>
+            {% for i in endorsement %}
+
+            <div style="margin-bottom: 1.5em;" class="card">
+                <div class="card-body">
+                    <h5>{{ i.name }}</h5>
+                    <p>{{ i.body }}</p>
+                </div>
+            </div>
+
+            {% empty %}
+                <h3>Rightnow we dont have any skill added in out DataBase!</h3>
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <section class="section--1">
         <div class="container">
             <form class="contact--form" method="POST" action="">
                 {% csrf_token %}

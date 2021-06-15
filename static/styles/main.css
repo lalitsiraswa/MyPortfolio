@@ -31,8 +31,8 @@ body{
     background-color: #1F2428;
     /*height: 100vh;*/ /* vh : viewport */
     /* height: 70vh; */
-    /* min-height: auto; */
-    min-height: 70vh;
+    min-height: auto;
+    /* min-height: 70vh; */
     /* min-height: 60vh; */
     color: white;
 }

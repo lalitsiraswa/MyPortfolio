@@ -3,7 +3,7 @@ from typing import ContextManager
 from django.forms.models import model_to_dict
 from django.shortcuts import render, redirect
 from .models import Project, Skill, Tag, Message, Endorsement, Comment
-from .forms import ProjectForm, MessageForm, SkillForm, EndorsementForm, CommentForm
+from .forms import ProjectForm, MessageForm, SkillForm, EndorsementForm, CommentForm, QuestionForm
 from django.contrib import messages
 
 # Create your views here.
@@ -135,3 +135,16 @@ def addEndorsement(request):
 
 def donationPage(request):
     return render(request, 'base/donation.html')
+
+def chartPage(request):
+    form = QuestionForm()
+    if request.method == 'POST':
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Thank You For Your Vote!")
+            return redirect('chart')
+    context = {
+        'form': form
+    }
+    return render(request, 'base/chart.html', context=context)

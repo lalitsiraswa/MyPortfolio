@@ -1,0 +1,103 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <!-- <h3>Chart</h3> -->
+
+    <figure class="highcharts-figure">
+        <div id="container"></div>
+
+    </figure>
+
+    <form style="width: 500px; margin: 0 auto;" method="POST" action="">
+        {% csrf_token %}
+
+        {% for field in form %}
+
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">{{field.label}}</label>
+                {{field}}
+            </div>
+
+        {% endfor %}
+        <input class="btn btn-primary" type="submit" value="Place Your Vote">
+    </form>
+
+</div>
+
+<script>
+
+    let loadData = () => {
+        fetch('http://127.0.0.1:8000/api/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                renderChart(data.backend, data.frontend, data.fullstack)
+            });
+    }
+
+    loadData()
+
+    let renderChart = (backend, frontend, fullstack) => {
+        Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Developer Types'
+        },
+        subtitle: {
+            text: 'Source: Dennis Ivys Stream'
+        },
+        // xAxis: {
+        //     categories: [
+        //         'Backend',
+        //         'Frontend',
+        //         'FullStack',
+        //     ],
+        //     crosshair: true
+        // },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Total'
+            }
+        },
+        // tooltip: {
+        //     headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        //     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+        //         '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+        //     footerFormat: '</table>',
+        //     shared: true,
+        //     useHTML: true
+        // },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Backend Dev.',
+            data: [backend]
+
+        }, {
+            name: 'Frontend Dev.',
+            data: [frontend]
+
+        }, {
+            name: 'FullStack Dev.',
+            data: [fullstack]
+
+        }] 
+    });
+    }
+    renderChart()
+</script>
+{% endblock content %}

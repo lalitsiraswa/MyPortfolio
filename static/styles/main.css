@@ -150,9 +150,19 @@ body{
 }
 
 .skills--wrapper{ 
+    display: flex;
     margin-top: 2em;
     margin-bottom: 2em;
+    gap: 2em;
+    align-items: center;
+    /* align-items: start; */
 }
+.skill--logo{
+    /* height: 60px; */
+    width: 60px;
+    object-fit: contain;
+}
+
 .other--skills-wrapper{
     display: flex;
     flex-wrap: wrap;
@@ -191,9 +201,15 @@ body{
 @media (max-width:600px) {
     .skills--container{
         width: 100%;
-        background-color:chocolate;
+        /* background-color:chocolate; */
         /* margin: 0 auto; */
         /* background-color: black; */
+    }
+}
+
+@media (max-width:400px) {
+    .skills--wrapper{ 
+        flex-flow: column;
     }
 }
 
